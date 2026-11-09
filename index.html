@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your ZeroHero Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+/* Layout: phone-first card deck, one slide at a time, brand pink + battery orange on a soft pink-tinted white. Single light brand look by choice. */
+:root{
+  --bg:#fdf6fa;
+  --card:#ffffff;
+  --ink:#2a1622;
+  --muted:#6f5a66;
+  --line:#f0dbe7;
+  --pink:#ec008c;
+  --pink-deep:#b8006d;
+  --pink-soft:#fde3f2;
+  --orange:#fbae47;
+  --orange-soft:#fff1dd;
+  --orange-ink:#8a4f00;
+  --display:"Rubik",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;padding-inline:16px;padding-block:20px 24px}
+.deck{width:100%;max-width:520px;display:flex;flex-direction:column;gap:16px;flex:1}
+
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--orange));border-radius:99px;transition:width .35s ease}
+
+.stage{position:relative;flex:1;display:grid}
+.slide{grid-area:1/1;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 24px;box-shadow:0 10px 30px -18px rgba(184,0,109,.35);display:flex;flex-direction:column;gap:18px;min-width:0}
+.slide[hidden]{display:none!important}
+.slide.enter{animation:in .35s ease both}
+@keyframes in{from{opacity:.001;transform:translateX(var(--dir,24px))}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.slide.enter{animation:none}.progress span{transition:none}}
+
+.eyebrow{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink)}
+h1,h2{font-family:var(--display);font-weight:800;margin:0;line-height:1.1;text-wrap:balance;color:var(--ink)}
+.slide{container-type:inline-size}
+h1{font-size:30px;font-size:min(30px,6.5cqi);white-space:nowrap;letter-spacing:-.01em;text-align:center}
+h2{font-size:clamp(26px,7vw,32px)}
+h2 .hl{color:var(--pink)}
+p{margin:0}
+.lead{font-size:18px;color:var(--ink)}
+.small{font-size:14px;color:var(--muted)}
+
+.logo{display:block;width:100%;max-width:100%;height:auto;border-radius:14px}
+
+.pill{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;background:var(--orange-soft);color:var(--orange-ink);font-weight:700;font-size:14px;padding:6px 12px;border-radius:99px}
+
+.points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.points li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
+.tick{width:28px;height:28px;border-radius:50%;background:var(--pink-soft);display:grid;place-items:center;margin-top:1px}
+.tick svg{width:15px;height:15px}
+.points strong{color:var(--ink)}
+
+.visual{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap;padding:8px 0}
+.clock{width:min(190px,52vw);height:auto;max-width:100%}
+.timechip{font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink);text-align:center;line-height:1.15}
+.timechip small{display:block;font-family:var(--body);font-weight:600;font-size:13px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+
+.big{font-family:var(--display);font-weight:800;color:var(--pink);font-size:56px;line-height:1}
+.big sub{font-size:22px;vertical-align:baseline;color:var(--ink);font-weight:700;margin-left:2px}
+
+.compare{display:grid;grid-template-columns:1fr;gap:10px}
+.compare div{border-radius:14px;padding:12px;background:var(--bg);border:1px solid var(--line)}
+.compare b{display:block;font-family:var(--display);font-size:26px;color:var(--pink);line-height:1.1}
+.compare span{font-size:14px;color:var(--muted)}
+
+.vpp{width:100%;max-width:100%;height:auto}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.steps li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--pink);color:#fff;font-family:var(--display);font-weight:800;font-size:20px;display:grid;place-items:center}
+.steps b{display:block;font-size:17px}
+.steps span{font-size:14px;color:var(--muted)}
+.step-slide{align-items:center;text-align:center;justify-content:center}
+.step-slide .perks{justify-content:center}
+.ns-block{display:flex;flex-direction:column;gap:4px}
+.ns-h{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(21px,6cqi,26px);line-height:1.2;color:var(--pink);text-wrap:balance}
+.ns-list{margin:4px 0 0;padding-left:20px;text-align:left;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.ns-list li::marker{color:var(--pink)}
+.sn-change[hidden]{display:none!important}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ns-note{margin:12px 0 0;text-align:left;font-size:14.5px;line-height:1.45;padding:12px 14px;border-radius:12px;background:var(--orange-soft);border:1.5px solid var(--orange);color:var(--ink)}
+.ns-note strong{color:var(--orange-ink)}
+
+/* Brand picker (slide 1) */
+.picker{border:0;margin:0;padding:16px;border-radius:18px;background:var(--bg);display:flex;flex-direction:column;gap:12px;min-width:0}
+.picker legend{float:left;width:100%;padding:0;font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink)}
+.brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:360px){.brands{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.brand-btn{appearance:none;cursor:pointer;min-height:46px;padding:8px 6px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--body);font-weight:600;font-size:14px;line-height:1.2;transition:border-color .15s,background .15s}
+.brand-btn:hover{border-color:#e4cbd9}
+.brand-btn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.brand-btn.flash{background:var(--pink-soft)}
+.brand-btn.other{font-weight:500;color:var(--muted)}
+
+.pick-note{font-size:14px;color:var(--muted)}
+.pick-note[hidden]{display:none!important}
+.pick-note.ok{color:var(--pink-deep);font-weight:700}
+.btn.btn-primary.needs,.btn.btn-primary.needs:hover{background:var(--line);color:var(--muted);cursor:not-allowed}
+
+/* Ready / talk to sales (slide 6) */
+.choices.choices-stack{grid-template-columns:1fr}
+.view[hidden]{display:none!important}
+.view{display:flex;flex-direction:column;gap:18px}
+.view.enter{animation:in .35s ease both}
+.cb-back{align-self:center;appearance:none;border:0;background:none;font:inherit;font-weight:700;color:var(--muted);cursor:pointer;padding:8px 12px;border-radius:99px}
+.cb-back:hover{color:var(--ink)}
+.cb-back:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.cb-subj{white-space:nowrap;color:var(--pink-deep)}
+
+/* Reply-to-email demo: 10s loop. open "ZeroHero Follow Up" -> Reply -> type phone -> Send */
+.rd{--T:10s;position:relative;width:100%;max-width:300px;align-self:center;aspect-ratio:4/3.1;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 30px -18px rgba(42,22,34,.45);overflow:hidden;font-family:var(--body);text-align:left;container-type:inline-size}
+.rd-bar{position:absolute;inset:0 0 auto 0;height:11%;display:flex;align-items:center;gap:5px;padding-inline:12px;background:#f6eef3;border-bottom:1px solid var(--line);font-size:12px;font-weight:700;color:var(--ink)}
+.rd-bar i{width:8px;height:8px;border-radius:50%;background:#e2cbd8}
+.rd-bar span{position:absolute;left:58px;right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rd-t1{animation:rdOut var(--T) infinite}.rd-t2{opacity:0;animation:rdIn var(--T) infinite}
+.rd-inbox{position:absolute;inset:11% 0 0 0;animation:rdOut var(--T) infinite}
+.rd-inbox .row{height:22%}
+.rd-hit{animation:rdRow var(--T) infinite}
+.rd-mail{position:absolute;inset:11% 0 0 0;padding:5% 7%;display:flex;flex-direction:column;gap:6px;opacity:0;animation:rdIn var(--T) infinite}
+.rd-from{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+.rd-from b{color:var(--ink);font-size:12px}
+.rd-av{width:24px;height:24px;border-radius:50%;background:var(--pink);flex:none}
+.rd-subj{font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink);margin:2px 0}
+.rd-ln{display:block;height:6px;border-radius:4px;background:#efe3ea}
+.rd-reply{position:absolute;left:7%;top:62%;display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;border:1.5px solid #dccfd7;font-size:12px;font-weight:700;color:var(--ink);background:#fff;animation:rdReplyBtn var(--T) infinite}
+.rd-comp{position:absolute;left:4%;right:4%;bottom:4%;height:44%;border-radius:12px;border:1.5px solid var(--pink);background:#fff;box-shadow:0 -6px 20px -10px rgba(42,22,34,.35);padding:8px 10px;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(20%);animation:rdComp var(--T) infinite}
+.rd-re{font-size:10.5px;font-weight:700;color:var(--muted)}
+.rd-type{align-self:flex-start;padding-right:1px;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;max-width:0;border-right:2px solid var(--pink);animation:rdType var(--T) infinite}
+.rd-send{position:absolute;right:8px;bottom:8px;padding:5px 14px;border-radius:99px;background:var(--pink);color:#fff;font-family:var(--display);font-weight:700;font-size:12px;animation:rdSendBtn var(--T) infinite}
+.rd-toast{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);padding:8px 14px;border-radius:99px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;opacity:0;animation:rdToast var(--T) infinite;z-index:2}
+.rd-cur{position:absolute;width:24px;height:24px;left:80%;top:90%;opacity:0;pointer-events:none;z-index:3;animation:rdCur var(--T) infinite}
+.rd-cur svg{width:100%;height:100%;display:block;transform-origin:3px 2px;animation:rdClick var(--T) infinite}
+@keyframes rdOut{0%,24%{opacity:1}29%,95%{opacity:0}100%{opacity:1}}
+@keyframes rdIn{0%,24%{opacity:0}29%,95%{opacity:1}100%{opacity:0}}
+@keyframes rdRow{0%,15%{background:transparent}18%,28%{background:var(--pink-soft)}32%,100%{background:transparent}}
+@keyframes rdCur{0%{left:80%;top:90%;opacity:0}4%{opacity:1;left:80%;top:90%}15%,28%{left:46%;top:23%}36%,40%{left:16%;top:66%}52%{left:60%;top:96%}74%,92%{left:86%;top:86%;opacity:1}97%,100%{left:86%;top:86%;opacity:0}}
+@keyframes rdClick{0%,16.5%{transform:scale(1)}18%{transform:scale(.78)}19.5%,37%{transform:scale(1)}38.5%{transform:scale(.78)}40%,76.5%{transform:scale(1)}78%{transform:scale(.78)}79.5%,100%{transform:scale(1)}}
+@keyframes rdReplyBtn{0%,37%{background:#fff;border-color:#dccfd7}38.5%,44%{background:var(--pink-soft);border-color:var(--pink)}48%,100%{background:#fff;border-color:#dccfd7}}
+@keyframes rdComp{0%,39%{opacity:0;transform:translateY(20%)}43%,92%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes rdType{0%,45%{max-width:0}70%,92%{max-width:100%}100%{max-width:0}}
+@keyframes rdSendBtn{0%,77%{transform:scale(1)}78.5%{transform:scale(.92)}80%,100%{transform:scale(1)}}
+@keyframes rdToast{0%,80%{opacity:0;transform:translate(-50%,-30%)}83%,93%{opacity:1;transform:translate(-50%,-50%)}97%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .rd *{animation:none!important}
+  .rd-inbox,.rd-t1,.rd-cur{opacity:0}
+  .rd-mail,.rd-t2,.rd-comp{opacity:1;transform:none}
+  .rd-type{max-width:100%;border-right:0}
+}
+
+/* App choice (slide 5) */
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:380px){.choices{grid-template-columns:1fr}}
+.choice{appearance:none;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--body);transition:border-color .15s,background .15s}
+.choice b{font-family:var(--display);font-weight:700;font-size:16px;line-height:1.2}
+.choice span{font-size:13px;color:var(--muted)}
+.choice:hover{border-color:var(--pink)}
+.choice:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.choice.flash,.choice.featured.flash{background:var(--pink-soft)}
+.choice.featured{position:relative;background:var(--card);border:3px solid var(--pink);color:var(--ink);padding-right:44px;box-shadow:0 10px 22px -12px rgba(236,0,140,.6);transition:transform .15s ease,box-shadow .15s ease,background .15s;animation:nudge 2.4s ease-in-out infinite}
+.choice.featured b{color:var(--pink-deep)}
+.choice.featured span{color:var(--muted)}
+.brand-btn{position:relative;padding-right:22px}
+.brand-btn::after{content:"›";position:absolute;right:9px;top:50%;transform:translateY(-52%);font-family:var(--display);font-weight:800;font-size:18px;line-height:1;color:var(--pink);transition:transform .15s ease}
+.brand-btn:hover::after{transform:translate(2px,-52%)}
+.choice.featured::after{content:"→";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;font-weight:800;font-size:15px;display:grid;place-items:center;transition:transform .15s ease}
+.choice.featured:hover{background:var(--pink-soft);transform:translateY(-2px);box-shadow:0 14px 26px -10px rgba(236,0,140,.7);animation:none}
+.choice.featured:hover::after{transform:translate(3px,-50%)}
+.choice.featured:active{transform:scale(.98)}
+
+@keyframes nudge{0%,100%{box-shadow:0 10px 22px -10px rgba(236,0,140,.7),0 0 0 0 rgba(236,0,140,.35)}50%{box-shadow:0 10px 22px -10px rgba(236,0,140,.7),0 0 0 7px rgba(236,0,140,0)}}
+@media (prefers-reduced-motion:reduce){.choice.featured{animation:none}}
+.rec{align-self:flex-start;font-style:normal;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--pink);padding:3px 8px;border-radius:99px;margin-bottom:2px}
+
+/* Own-app battery details demo: 9s loop. select brand -> skip serial -> tick VPP box */
+.fm{--T:9s;position:relative;overflow:hidden;width:100%;max-width:300px;margin-inline:auto;background:#ffffff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px -18px rgba(42,22,34,.45);padding:12px;display:flex;flex-direction:column;gap:9px;font-family:var(--body)}
+.fm-title{font-family:var(--display);font-weight:700;font-size:14px;color:var(--ink);padding-bottom:6px;border-bottom:1.5px solid var(--ink)}
+.fm-row{display:flex;flex-direction:column;gap:4px}
+.fm-head{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:18px}
+.fm-lbl{font-size:11.5px;font-weight:600;color:var(--ink)}
+.fm-field{height:30px;border-radius:99px;border:1.5px solid #dccfd7;background:#fff;display:flex;align-items:center;justify-content:space-between;padding-inline:12px;font-size:13px;font-weight:600;color:var(--ink)}
+.fm-field i{font-style:normal;color:var(--muted);font-size:12px}
+.f1{animation:fmF1 var(--T) infinite}
+.fm-val{opacity:0;animation:fmVal var(--T) infinite}
+.f2{animation:fmF2 var(--T) infinite}
+.fm-check{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;line-height:1.35;color:var(--ink)}
+.fm-box{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #cbb9c4;background:#fff;color:transparent;display:grid;place-items:center;font-weight:800;font-size:14px;animation:fmBox var(--T) infinite}
+.fm-tag{flex:none;font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--pink);color:#fff;opacity:0;white-space:nowrap}
+.fm-tag.soft{background:var(--orange-soft);color:var(--orange-ink)}
+.t1{animation:fmT1 var(--T) infinite}.t2{animation:fmT2 var(--T) infinite}.t3{animation:fmT3 var(--T) infinite}
+.fm-cursor{position:absolute;width:24px;height:24px;left:85%;top:96%;opacity:0;pointer-events:none;z-index:3;animation:fmCur var(--T) infinite}
+.fm-cursor svg{width:100%;height:100%;display:block;transform-origin:3px 2px;animation:fmClick var(--T) infinite}
+.fm-ripple{position:absolute;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:var(--pink);opacity:0;pointer-events:none;z-index:2;animation:fmRip var(--T) infinite}
+@keyframes fmCur{
+  0%{left:85%;top:96%;opacity:0}5%{opacity:1;left:85%;top:96%}
+  16%,26%{left:40%;top:30%}
+  40%,50%{left:55%;top:57%}
+  64%,90%{left:30px;top:84%;opacity:1}
+  97%,100%{left:30px;top:84%;opacity:0}}
+@keyframes fmClick{0%,18.5%{transform:scale(1)}20%{transform:scale(.78)}21.5%,66.5%{transform:scale(1)}68%{transform:scale(.78)}69.5%,100%{transform:scale(1)}}
+@keyframes fmRip{
+  0%,19.5%{opacity:0;left:40%;top:30%;transform:scale(.2)}20.5%{opacity:.35;left:40%;top:30%;transform:scale(.4)}27%{opacity:0;left:40%;top:30%;transform:scale(1.6)}
+  27.1%,67.5%{opacity:0;left:30px;top:84%;transform:scale(.2)}68.5%{opacity:.35;left:30px;top:84%;transform:scale(.4)}75%,100%{opacity:0;left:30px;top:84%;transform:scale(1.6)}}
+@keyframes fmVal{0%,21%{opacity:0}24%,94%{opacity:1}100%{opacity:0}}
+@keyframes fmF1{0%,18%{border-color:#dccfd7;box-shadow:none}20%,30%{border-color:var(--pink);box-shadow:0 0 0 3px var(--pink-soft)}34%,100%{border-color:#dccfd7;box-shadow:none}}
+@keyframes fmF2{0%,40%{border-style:solid;border-color:#dccfd7}43%,54%{border-style:dashed;border-color:var(--orange)}58%,100%{border-style:solid;border-color:#dccfd7}}
+@keyframes fmBox{0%,68%{background:#fff;border-color:#cbb9c4;color:transparent}70%,94%{background:var(--pink);border-color:var(--pink);color:#fff}100%{background:#fff;border-color:#cbb9c4;color:transparent}}
+@keyframes fmT1{0%,22%{opacity:0;transform:translateY(3px)}25%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes fmT2{0%,42%{opacity:0;transform:translateY(3px)}45%,94%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes fmT3{0%,69%{opacity:0;transform:translateY(3px)}72%,94%{opacity:1;transform:none}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .fm *{animation:none!important}
+  .fm-val,.fm-val2,.fm-tag{opacity:1}
+  .fm-box{background:var(--pink);border-color:var(--pink);color:#fff}
+  .fm-cursor,.fm-ripple{display:none}
+}
+
+/* Serial number guide (step 2) */
+.sn:has(.fm){padding:0;border:0;background:none}
+.sn-more{border:1.5px solid var(--line);border-radius:14px;background:var(--bg);overflow:hidden}
+.sn-more summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--pink-deep)}
+.sn-more summary::-webkit-details-marker{display:none}
+.sn-more summary::after{content:"+";flex:none;width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:18px;line-height:1}
+.sn-more[open] summary::after{content:"\2212"}
+.sn-more summary:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
+.sn-body{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45}
+.sn-body h3{font-size:14.5px}
+.fm-val2{opacity:0;color:var(--muted);font-weight:500;animation:fmVal2 var(--T) infinite}
+@keyframes fmVal2{0%,44%{opacity:0}48%,94%{opacity:1}100%{opacity:0}}
+.sn{width:100%;text-align:left;display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:18px;background:var(--bg);border:1px solid var(--line)}
+.sn h3{margin:0;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink)}
+.sn-need{display:flex;flex-wrap:wrap;gap:6px}
+.sn-need span{font-size:13px;font-weight:700;padding:5px 10px;border-radius:99px;background:var(--pink);color:#fff}
+.sn ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.sn ol li::marker{color:var(--pink);font-weight:800}
+.sn .fmt{align-self:flex-start;font-size:13px;font-weight:700;padding:5px 10px;border-radius:8px;background:var(--orange-soft);color:var(--orange-ink)}
+.sn .warn{font-size:14px;padding:10px 12px;border-radius:10px;background:var(--pink-soft);color:var(--pink-deep)}
+.sn a{color:var(--pink-deep);font-weight:700}
+.sn-change{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin-block:4px;font-size:14px;color:var(--muted)}
+.sn-change select{font:inherit;font-weight:600;color:var(--ink);padding:6px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--card)}
+
+/* Email demo: 8s looping animation, inbox -> open email -> tap Join Now */
+.demo{--T:8s;position:relative;width:100%;max-width:300px;aspect-ratio:4/3.1;border-radius:16px;background:#ffffff;border:1px solid var(--line);box-shadow:0 12px 30px -18px rgba(42,22,34,.45);overflow:hidden;text-align:left;font-family:var(--body)}
+.demo-bar{position:absolute;inset:0 0 auto 0;height:11%;display:flex;align-items:center;gap:5px;padding-inline:12px;background:#f6eef3;border-bottom:1px solid var(--line);font-size:12px;font-weight:700;color:var(--ink)}
+.demo-bar i{width:8px;height:8px;border-radius:50%;background:#e2cbd8}
+.demo-bar span{position:absolute;left:58px;right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.t-inbox{animation:fadeOut var(--T) infinite}
+.t-mail{opacity:0;animation:fadeIn var(--T) infinite}
+.demo-inbox{position:absolute;inset:11% 0 0 0;animation:fadeOut var(--T) infinite}
+.row{height:22%;display:grid;grid-template-columns:10px 1fr auto;gap:10px;align-items:center;padding-inline:14px;border-bottom:1px solid #f3e6ee}
+.row-hit{animation:rowHi var(--T) infinite}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.dot.off{background:transparent}
+.rtext{display:flex;flex-direction:column;gap:5px;min-width:0}
+.rtext b{font-size:13px;color:var(--ink)}
+.rtext span{font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rtext i{display:block;height:7px;border-radius:4px;background:#efe3ea}
+.row em{font-style:normal;font-size:11px;color:var(--muted)}
+.row-hit em{color:var(--ink);font-weight:700}
+.demo-mail{position:absolute;inset:11% 0 0 0;display:flex;flex-direction:column;align-items:center;gap:4%;padding:4% 8% 0;opacity:0;animation:mailIn var(--T) infinite}
+.gb{height:16%;width:auto}
+.hi{align-self:flex-start;font-size:12px;margin:0;color:var(--ink)}
+.ln{align-self:flex-start;display:block;height:6px;border-radius:4px;background:#efe3ea}
+.join{position:relative;overflow:hidden;width:52%;height:13%;border-radius:99px;background:var(--pink);color:#fff;font-family:var(--display);font-weight:800;font-size:clamp(13px,4.2cqi,17px);display:grid;place-items:center;animation:press var(--T) infinite}
+.quote{width:100%;flex:1;border-radius:10px 10px 0 0;border:1px solid #eee;border-bottom:0;overflow:hidden;display:flex;flex-direction:column}
+.quote b{font-size:11px;color:var(--pink);padding:7px 10px;background:#f7f7f9}
+.quote span{flex:1;background:var(--orange)}
+.hint{position:absolute;top:64%;left:0;right:0;margin-inline:auto;width:max-content;box-shadow:0 4px 12px -6px rgba(42,22,34,.4);z-index:2;font-size:11px;font-weight:700;color:var(--pink-deep);background:var(--pink-soft);padding:4px 8px;border-radius:99px;opacity:0;animation:hint var(--T) infinite}
+.cursor{position:absolute;width:26px;height:26px;left:80%;top:88%;opacity:0;animation:cur var(--T) infinite;pointer-events:none;z-index:3}
+.cursor svg{width:100%;height:100%;display:block;animation:click var(--T) infinite;transform-origin:3px 2px}
+.ripple{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--pink);opacity:0;pointer-events:none}
+.r1{left:46%;top:23%;animation:rip1 var(--T) infinite;z-index:2}
+.r2{left:50%;top:50%;background:#ffffff;animation:rip2 var(--T) infinite}
+@keyframes fadeOut{0%,27%{opacity:1}32%,95%{opacity:0}100%{opacity:1}}
+@keyframes fadeIn{0%,27%{opacity:0}32%,95%{opacity:1}100%{opacity:0}}
+@keyframes mailIn{0%,27%{opacity:0;transform:translateX(6%)}33%,94%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes rowHi{0%,18%{background:transparent}21%,32%{background:var(--pink-soft)}36%,100%{background:transparent}}
+@keyframes cur{0%{left:80%;top:88%;opacity:0}5%{opacity:1;left:80%;top:88%}18%,34%{left:46%;top:23%}56%,92%{left:52%;top:52%;opacity:1}98%,100%{left:52%;top:52%;opacity:0}}
+@keyframes click{0%,19.5%{transform:scale(1)}21%{transform:scale(.78)}23%,61.5%{transform:scale(1)}63%{transform:scale(.78)}65%,100%{transform:scale(1)}}
+@keyframes rip1{0%,20.5%{opacity:0;transform:scale(.2)}21.5%{opacity:.35;transform:scale(.4)}28%,100%{opacity:0;transform:scale(1.6)}}
+@keyframes rip2{0%,62.5%{opacity:0;transform:scale(.2)}63.5%{opacity:.5;transform:scale(.4)}71%,100%{opacity:0;transform:scale(3)}}
+@keyframes press{0%,62%{transform:scale(1);box-shadow:0 0 0 0 rgba(236,0,140,0)}63.5%{transform:scale(.94)}66%{transform:scale(1);box-shadow:0 0 0 0 rgba(236,0,140,.45)}80%{box-shadow:0 0 0 12px rgba(236,0,140,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(236,0,140,0)}}
+@keyframes hint{0%,66%{opacity:0;transform:translateY(4px)}70%,92%{opacity:1;transform:none}96%,100%{opacity:0}}
+.demo{container-type:inline-size}
+@media (prefers-reduced-motion:reduce){
+  .demo *{animation:none!important}
+  .demo-inbox,.t-inbox{opacity:0}
+  .demo-mail,.t-mail,.hint{opacity:1}
+  .cursor{opacity:1;left:52%;top:52%}
+}
+.stepnum{width:96px;height:96px;border-radius:50%;background:var(--pink);color:#fff;font-family:var(--display);font-weight:800;font-size:48px;display:grid;place-items:center;box-shadow:0 0 0 10px var(--pink-soft)}
+
+.perks{display:flex;flex-wrap:wrap;gap:8px}
+.perks span{font-size:13px;font-weight:600;padding:6px 10px;border-radius:99px;background:var(--pink-soft);color:var(--pink-deep)}
+
+.btn{appearance:none;border:0;cursor:pointer;font-family:var(--display);font-weight:700;font-size:17px;border-radius:99px;padding:14px 22px;min-height:50px;transition:transform .12s ease,background .2s}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.btn-primary{background:var(--pink);color:#fff;width:100%}
+.btn-primary:hover{background:var(--pink-deep)}
+.btn-ghost{background:transparent;color:var(--muted);padding-inline:14px}
+.btn-ghost:hover{color:var(--ink)}
+.btn[disabled]{display:none}
+
+.nav{display:flex;align-items:center;gap:10px}
+.nav .btn-primary{flex:1}
+.dots{display:flex;justify-content:center;gap:8px}
+.dots button{width:10px;height:10px;border-radius:99px;border:0;padding:0;background:var(--line);cursor:pointer;transition:width .25s,background .25s}
+.dots button[aria-current="true"]{width:26px;background:var(--pink)}
+.dots button:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.foot{text-align:center;font-size:12px;color:var(--muted)}
+
+/* ---- Additions ---- */
+.note{font-size:15.5px;line-height:1.45;padding:12px 14px;border-radius:14px;background:var(--orange-soft);border:1.5px solid var(--orange);color:var(--ink)}
+.note strong{color:var(--orange-ink)}
+.note.pink{background:var(--pink-soft);border-color:var(--pink)}
+.note.pink strong{color:var(--pink-deep)}
+.points .small{display:block;margin-top:2px}
+.welcome{align-items:stretch}
+.welcome .lead{text-align:left}
+
+/* Feed-in rates */
+.rates{display:flex;flex-direction:column;gap:8px}
+.rate{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.rate b.c{font-family:var(--display);font-weight:800;font-size:24px;color:var(--pink);text-align:center}
+.rate.r-lo b.c{color:var(--orange-ink)}
+.rate.r-no b.c{color:var(--muted)}
+.rate.top{border:2px solid var(--pink);background:var(--card)}
+.rate span{display:flex;flex-direction:column;font-size:15px}
+.rate small{font-size:13.5px;color:var(--muted)}
+
+/* Day timeline */
+.day{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.day li{display:grid;grid-template-columns:8px 1fr;gap:12px;padding:12px 14px 12px 12px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.day li::before{content:"";border-radius:99px;background:var(--c,var(--ink))}
+.day .free{--c:var(--pink)}
+.day .sb{--c:var(--orange)}
+.day .bat{--c:#2a1622}
+.day .night{--c:#7a6170}
+.day .when{font-family:var(--display);font-weight:800;font-size:17px;line-height:1.2}
+.day .say{display:inline-block;margin:4px 0 2px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.day .do{font-size:15px;line-height:1.4}
+.day .tag{font-size:12.5px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span{font-size:13px;font-weight:700;padding:5px 10px;border-radius:99px;background:var(--pink-soft);color:var(--pink-deep)}
+.chips span.sell{background:var(--orange-soft);color:var(--orange-ink)}
+
+/* Expandable */
+.more{border:1.5px solid var(--line);border-radius:14px;background:var(--bg);overflow:hidden}
+.more summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;font-family:var(--display);font-weight:700;font-size:15.5px;color:var(--pink-deep)}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";flex:none;width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:18px;line-height:1}
+.more[open] summary::after{content:"\2212"}
+.more summary:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
+.more-body{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.45}
+.more-body h3{margin:4px 0 0;font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink)}
+.more-body ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.more-body li::marker{color:var(--pink);font-weight:800}
+.more-body a{color:var(--pink-deep);font-weight:700}
+
+/* App comparison */
+.cmp{border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14.5px}
+.cr{display:grid;grid-template-columns:1fr 64px 84px;align-items:center;gap:6px;padding:9px 12px;border-top:1px solid var(--line)}
+.cr:first-child{border-top:0}
+.cr.ch{background:var(--pink-soft);font-family:var(--display);font-weight:700;font-size:12.5px;line-height:1.15;color:var(--pink-deep);text-align:center}
+.cr .cl small{display:block;font-size:12.5px;color:var(--muted)}
+.cc{display:grid;place-items:center}
+.yes,.no{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px}
+.yes{background:var(--pink);color:#fff}
+.no{background:var(--line);color:var(--muted)}
+.same{font-size:15.5px}
+.brandlist{display:flex;flex-wrap:wrap;gap:6px}
+.brandlist span{font-size:13px;font-weight:600;padding:5px 10px;border-radius:99px;background:var(--card);border:1.5px solid var(--line)}
+.choice[aria-pressed="true"]{background:var(--pink-soft);border-color:var(--pink)}
+.choice.unsure{border-style:dashed}
+
+/* Scheduling */
+.set{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.set h3,.blk h3{margin:0;font-family:var(--display);font-weight:700;font-size:16px}
+.set .row2{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;font-size:15px}
+.set .tm{font-family:var(--display);font-weight:800;font-size:14px;padding:6px 10px;border-radius:10px;background:var(--pink);color:#fff;white-space:nowrap}
+.set .tm.opt{background:var(--orange-soft);color:var(--orange-ink)}
+.blk{display:flex;flex-direction:column;gap:12px}
+.blk[hidden]{display:none!important}
+.linkbtn{display:flex;flex-direction:column;gap:2px;text-decoration:none;padding:14px 16px;border-radius:16px;border:2px solid var(--pink);background:var(--card);color:var(--ink);font-size:15.5px;font-weight:600;position:relative;padding-right:48px}
+.linkbtn b{font-family:var(--display);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.linkbtn small{font-size:13px;font-weight:500;color:var(--muted)}
+.linkbtn::after{content:"↗";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.linkbtn:hover{background:var(--pink-soft)}
+.linkbtn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.yourchoice{align-self:flex-start;font-size:13px;font-weight:700;padding:5px 10px;border-radius:99px;background:var(--pink-soft);color:var(--pink-deep)}
+.change{align-self:center;appearance:none;border:0;background:none;font:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer;padding:6px 10px;text-decoration:underline}
+
+/* Final slide */
+.fin{align-items:stretch}
+.fin .demo{align-self:center}
+.contact{display:grid;grid-template-columns:1fr;gap:10px}
+@media (max-width:380px){.contact{grid-template-columns:1fr}}
+.box{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line);min-width:0}
+.box .who{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.box .nm{font-family:var(--display);font-weight:800;font-size:20px}
+.box a{color:var(--ink);font-weight:600;font-size:14px;overflow-wrap:anywhere}
+.box a.ph{font-family:var(--display);font-weight:800;font-size:20px;text-decoration:none;color:var(--pink-deep)}
+.box .small{margin-top:4px}
+.ghostlink{display:flex;justify-content:center;align-items:center;text-decoration:none;font-family:var(--display);font-weight:700;font-size:16px;padding:13px 18px;border-radius:99px;border:2px solid var(--pink);color:var(--pink-deep);background:var(--card)}
+.ghostlink:hover{background:var(--pink-soft)}
+.big2{font-family:var(--display);font-weight:800;font-size:22px;color:var(--pink)}
+
+/* Before / after tabs */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
+.tab{appearance:none;border:0;cursor:pointer;border-radius:99px;padding:10px 8px;min-height:44px;font-family:var(--display);font-weight:700;font-size:15px;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.tab small{font-family:var(--body);font-weight:500;font-size:11.5px;opacity:.85}
+.tab[aria-selected="true"]{background:var(--pink);color:#fff}
+.tab:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.swaptab{appearance:none;cursor:pointer;font:inherit;text-align:left;width:100%;display:flex;flex-direction:column;gap:2px;padding:14px 48px 14px 16px;border-radius:16px;border:2px dashed var(--pink);background:var(--card);color:var(--ink);font-size:15.5px;font-weight:600;position:relative}
+.swaptab b{font-family:var(--display);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pink)}
+.swaptab::after{content:"→";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
+.swaptab:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.signup{align-items:stretch}
+.signup .demo{align-self:center}
+.brandpick{display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:600}
+.brandpick select{font:inherit;font-weight:600;color:var(--ink);padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--card)}
+.sn{padding:0;border:0;background:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<main class="deck" aria-label="ZeroHero plan guide">
+  <div class="topbar"><span class="brand">GloBird Energy</span><span class="count" id="count">1 / 8</span></div>
+  <div class="tabs" role="tablist" aria-label="Choose a guide">
+    <button type="button" class="tab" role="tab" data-tab="before" aria-selected="true">Before sign up<small>Learn about the plan</small></button>
+    <button type="button" class="tab" role="tab" data-tab="after" aria-selected="false">After sign up<small>Set up your battery</small></button>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+  <div class="stage" id="stage">
+
+    <!-- ===== BEFORE SIGN UP ===== -->
+
+    <!-- B1 Welcome -->
+    <section class="slide welcome" data-tab="before" data-id="b1">
+      <img class="logo" src="data:image/png;base64,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" alt="ZeroHero">
+      <h1>Your ZeroHero Plan</h1>
+      <p class="lead">This guide tells you more about our <strong>ZeroHero plan</strong> and shows you <strong>how to sign up online</strong>.</p>
+      <p class="lead">It takes about <strong>2 minutes</strong>. Tap <strong>Next</strong> or swipe to move along.</p>
+      <span class="pill">⏱ 8 quick slides</span>
+      <p class="note"><strong>Already signed up?</strong> Tap <strong>After sign up</strong> at the top to set up your battery.</p>
+    </section>
+
+    <!-- B2 Free power -->
+    <section class="slide" data-tab="before" data-id="b2" hidden>
+      <span class="eyebrow">Saving 1 · Every day</span>
+      <h2><span class="hl">Free</span> power at midday</h2>
+      <div class="visual">
+        <svg class="clock" data-from="12" data-to="3" viewBox="0 0 200 200" role="img" aria-label="Clock showing 12 PM to 3 PM highlighted"></svg>
+        <div class="timechip">12 PM – 3 PM<small>Local time</small></div>
+      </div>
+      <ul class="points">
+        <li><span class="tick"></span><p>Your battery usually charges from <strong>solar only</strong>. If solar is not enough, use this free time to <strong>charge it from the grid</strong>. Set a schedule (timer) for this.</p></li>
+        <li><span class="tick"></span><p>Run your <strong>big appliances</strong> now: washing machine, dryer and dishwasher. Also <strong>hot water</strong> or a <strong>pool pump</strong> on a timer, and charging an <strong>electric car</strong>.</p></li>
+        <li><span class="tick"></span><p>Charge your battery in <strong>any weather</strong>, so it is ready to run your home on your own stored power.</p></li>
+      </ul>
+      <span class="pill">Free up to 50 kWh a day. After that, a small cost.</span>
+    </section>
+
+    <!-- B3 $1 a day -->
+    <section class="slide" data-tab="before" data-id="b3" hidden>
+      <span class="eyebrow">Saving 2 · Every day</span>
+      <h2>Earn <span class="hl">$1 a day</span></h2>
+      <div class="visual">
+        <svg class="clock" data-from="6" data-to="9" viewBox="0 0 200 200" role="img" aria-label="Clock showing 6 PM to 9 PM highlighted"></svg>
+        <div class="timechip">6 PM – 9 PM<small>Use your battery,<br>stay off the grid</small></div>
+      </div>
+      <ul class="points">
+        <li><span class="tick"></span><p>If your battery covers your <strong>total home usage from 6pm to 9pm</strong>, we pay you <strong>$1 a day</strong>. It is <strong>automatic</strong>, with nothing to set up.</p></li>
+        <li><span class="tick"></span><p>It is designed to <strong>help offset your daily supply charge</strong>, the fixed amount on your bill.</p></li>
+        <li><span class="tick"></span><p>A <strong>tiny trickle</strong> from the grid is normal and OK: up to <strong>0.03 kWh each hour</strong>.</p></li>
+        <li><span class="tick"></span><p>Your battery can only give <strong>so much power at one time</strong>. If many big appliances are on together, the extra may come from the grid. <strong>Check your battery's app</strong> to see how much power (kW) it can give.</p></li>
+      </ul>
+      <span class="pill">Up to $365 a year</span>
+    </section>
+
+    <!-- B4 Feed-in -->
+    <section class="slide" data-tab="before" data-id="b4" hidden>
+      <span class="eyebrow">Saving 3 · Feed-in · Optional</span>
+      <h2>Sell power for <span class="hl">10c/kWh</span></h2>
+      <div class="visual">
+        <svg class="clock" data-from="6" data-to="9" viewBox="0 0 200 200" role="img" aria-label="Clock showing 6 PM to 9 PM highlighted"></svg>
+        <div class="timechip">6 PM – 9 PM<small>Sell back to the grid</small></div>
+      </div>
+      <div class="rates">
+        <div class="rate top"><b class="c">10c</b><span><strong>6pm to 9pm: sell here</strong><small>First 15 kWh each day</small></span></div>
+        <div class="rate r-lo"><b class="c">2c</b><span><strong>Other evening times</strong><small>4pm to 6pm and 9pm to 11pm</small></span></div>
+        <div class="rate r-no"><b class="c">0c</b><span><strong>During the day</strong><small>No problem: your solar charges your battery instead</small></span></div>
+      </div>
+      <p class="lead">You choose how much to sell. <strong>Keep enough for your home.</strong></p>
+    </section>
+
+    <!-- B5 Your day -->
+    <section class="slide" data-tab="before" data-id="b5" hidden>
+      <span class="eyebrow">Putting it together</span>
+      <h2>Your <span class="hl">day</span> on ZeroHero</h2>
+      <p class="small">All times are your local time.</p>
+      <ul class="day">
+        <li class="free"><div><div class="when">12pm to 3pm</div><span class="say">Free grid power</span><p class="do">Charge your battery. Run big appliances.</p><span class="tag">Midday · Off-peak</span></div></li>
+        <li class="sb"><div><div class="when">3pm to 4pm</div><span class="say">Solar + battery</span><p class="do">Your solar and battery can power your home.</p><span class="tag">Afternoon · Shoulder</span></div></li>
+        <li class="bat"><div><div class="when">4pm to 11pm</div><span class="say">Battery power</span><p class="do">Grid power costs the most now, so your battery <strong>can help you save by avoiding the grid</strong>.</p><span class="tag">Evening · Peak</span>
+          <div class="chips"><span>$1 a day, 6pm to 9pm</span><span class="sell">Optional: sell for 10c</span></div></div></li>
+        <li class="night"><div><div class="when">11pm to 12pm next day</div><span class="say">Battery power</span><p class="do">Your battery powers your home until your solar kicks in. Many homes use less power overnight, so a well-sized battery may cover it.</p><span class="tag">Overnight and morning · Shoulder</span></div></li>
+      </ul>
+      <p class="note pink"><strong>Small bonus with our app: Critical Events.</strong> On rare days when power prices spike, we may send an app message asking you to sell or charge for about 5 minutes. Do it and get rewarded ($1 per kWh to sell, 5c per kWh to charge). It is optional, and you can ignore it.</p>
+    </section>
+
+    <!-- B6 Choose app -->
+    <section class="slide" data-tab="before" data-id="b6" data-choice hidden>
+      <span class="eyebrow">Your battery</span>
+      <h2>How would you like to <span class="hl">control your battery</span>?</h2>
+      <p class="same">ZeroHero works with <strong>any home battery brand</strong>. You get the <strong>same 3 main savings</strong> either way. Our app adds a couple of <strong>optional extras</strong>.</p>
+      <div class="cmp" role="table" aria-label="Our app compared with your battery's own app">
+        <div class="cr ch" role="row"><span role="columnheader"></span><span role="columnheader">Our<br>app</span><span role="columnheader">Battery's<br>own app</span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">Free power 12pm to 3pm</span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">$1 a day, 6pm to 9pm</span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">10c per kWh feed-in, 6pm to 9pm</span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">You stay in full control</span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">We can manage it for you<small>Optional, only if you choose</small></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="no" aria-label="No">✕</i></span></div>
+        <div class="cr" role="row"><span class="cl" role="cell">Critical Events<small>Rewards during price spikes</small></span><span class="cc" role="cell"><i class="yes" aria-label="Yes">✓</i></span><span class="cc" role="cell"><i class="no" aria-label="No">✕</i></span></div>
+      </div>
+      <p class="small">Choosing our app is also called <strong>binding your battery</strong> or <strong>joining the VPP</strong>.</p>
+      <div class="choices choices-stack" role="group" aria-label="Choose how to control your battery">
+        <button type="button" class="choice featured" data-app="yes" aria-pressed="false"><em class="rec">Most popular</em><b>Yes, use GloBird's app</b><span>Video help included. Most customers with a compatible battery pick this.</span></button>
+        <button type="button" class="choice" data-app="no" aria-pressed="false"><b>No, use my battery's own app</b><span>Guides for most brands. Your installer can also help.</span></button>
+        <button type="button" class="choice unsure" data-app="later" aria-pressed="false"><b>Not sure yet</b><span>Decide later. You can bind your battery any time.</span></button>
+      </div>
+      <details class="more">
+        <summary>Brands that can use our app</summary>
+        <div class="more-body">
+          <div class="brandlist"><span>AlphaESS</span><span>Anker</span><span>FoxESS</span><span>Neovolt</span><span>Redback</span><span>SAJ</span><span>Sigenergy</span><span>SolaX</span><span>Solis + Dyness</span><span>Sungrow</span><span>WHES (eCactus)</span></div>
+          <p>Brand not on the list? Pick <strong>No</strong>. You still get the main ZeroHero savings, and if your brand can connect in the future, we will let you know.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- B7 How to sign up online -->
+    <section class="slide signup" data-tab="before" data-id="b7" hidden>
+      <span class="eyebrow">How to sign up online</span>
+      <h2>Sign up in <span class="hl">2 steps</span></h2>
+      <span class="yourchoice" hidden></span>
+      <div class="ns-block">
+        <h3 class="ns-h">Step 1: Open the quote email I sent you</h3>
+        <p class="lead">Tap <strong>Join Now</strong> to start your sign up.</p>
+      </div>
+      <div class="demo" role="img" aria-label="Animation: opening the 'Your Quote from GloBird Energy' email in the inbox, then tapping the Join Now button">
+        <div class="demo-bar"><i></i><i></i><i></i><span class="t-inbox">Inbox</span><span class="t-mail">Your Quote from GloBird Energy</span></div>
+        <div class="demo-inbox">
+          <div class="row row-hit"><span class="dot"></span><div class="rtext"><b>GloBird Energy</b><span>Your Quote from GloBird Energy</span></div><em>10:32 AM</em></div>
+          <div class="row"><span class="dot off"></span><div class="rtext"><i style="width:44%"></i><i style="width:70%"></i></div><em>9:15 AM</em></div>
+          <div class="row"><span class="dot off"></span><div class="rtext"><i style="width:36%"></i><i style="width:62%"></i></div><em>Yesterday</em></div>
+          <div class="row"><span class="dot off"></span><div class="rtext"><i style="width:50%"></i><i style="width:56%"></i></div><em>Mon</em></div>
+        </div>
+        <div class="demo-mail">
+          <img class="gb" src="data:image/png;base64,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" alt="">
+          <p class="hi">Hi there,</p>
+          <i class="ln" style="width:78%"></i><i class="ln" style="width:58%"></i>
+          <div class="join">Join Now<span class="ripple r2"></span></div>
+          <div class="quote"><b>⚡ Your electricity quote</b><span></span></div>
+          <div class="hint">Tap Join Now</div>
+        </div>
+        <span class="ripple r1"></span>
+        <div class="cursor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L7.5 14.8 L10.6 21.6 L13.6 20.3 L10.6 13.6 L17 13.6 Z" fill="#2a1622" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="ns-block">
+        <h3 class="ns-h">Step 2: Enter your battery details</h3>
+        <div class="lead" id="snLead"></div>
+      </div>
+      <div class="sn" id="snCard"></div>
+      <button type="button" class="change" data-change>Change my app choice</button>
+    </section>
+
+    <!-- B8 Ready -->
+    <section class="slide fin" data-tab="before" data-id="b8" hidden>
+      <span class="eyebrow">Ready to start saving?</span>
+      <h2>Switching is <span class="hl">easy</span></h2>
+      <div class="perks"><span>Free power 12pm–3pm</span><span>$1 a day, 6pm–9pm</span><span>10c/kWh if you sell</span></div>
+      <ul class="points">
+        <li><span class="tick"></span><p><strong>Free to join.</strong> No lock-in contract and no exit fees.</p></li>
+        <li><span class="tick"></span><p><strong>We handle the switch.</strong> No need to call your current provider.</p></li>
+        <li><span class="tick"></span><p><strong>Your power stays on.</strong> No interruption to your supply.</p></li>
+        <li><span class="tick"></span><p><strong>We will let you know</strong> when your switch to us is complete.</p></li>
+      </ul>
+      <p class="note"><strong>Sign up now:</strong> open the quote email I sent you and tap <strong>Join Now</strong>. It usually takes just a few minutes.</p>
+      <div class="contact">
+        <div class="box"><span class="who">Your agent</span><span class="nm">Rhys</span><a href="mailto:rhys.gerring@globirdenergy.com.au">rhys.gerring@globirdenergy.com.au</a><span class="small">Just reply to my email with your question and your phone number, and I will call you back.</span></div>
+        <div class="box"><span class="who">Customer service</span><a class="ph" href="tel:133456">133 456</a><a href="mailto:cs@globirdenergy.com.au">cs@globirdenergy.com.au</a></div>
+      </div>
+      <details class="more">
+        <summary>Refer friends and family: get $50</summary>
+        <div class="more-body">
+          <p class="big2">You get $50. They get $50.</p>
+          <p>For <strong>every friend or family member</strong> who joins us after you, <strong>you get $50 off your bill</strong> and <strong>they get $50 off theirs</strong>.</p>
+          <ol>
+            <li>Send them a link to join through <strong>your app</strong>.</li>
+            <li>Or put them in touch with me: <a href="mailto:rhys.gerring@globirdenergy.com.au">rhys.gerring@globirdenergy.com.au</a></li>
+            <li>Or they can call <strong>133 456</strong>. Any agent can sign them up. They just need to <strong>tell us you referred them</strong>.</li>
+          </ol>
+        </div>
+      </details>
+      <p class="small" style="text-align:center">Still not convinced? Hear it from customers already saving with ZeroHero.</p>
+      <a class="ghostlink" href="https://www.globirdenergy.com.au/energy-saver/zerohero-testimonials/" target="_blank" rel="noopener">Watch customer testimonials</a>
+      <button type="button" class="swaptab" data-goto="after"><b>After you sign up</b>Set up your battery to get the free power</button>
+    </section>
+
+    <!-- ===== AFTER SIGN UP ===== -->
+
+    <!-- A1 Welcome + choose app -->
+    <section class="slide" data-tab="after" data-id="a1" data-choice hidden>
+      <span class="eyebrow">After sign up</span>
+      <h2>Welcome to <span class="hl">ZeroHero</span>!</h2>
+      <p class="lead">Let's set up your battery so you get the <strong>free power</strong> and can <strong>sell your excess</strong>. It takes 1 minute to read.</p>
+      <p class="lead"><strong>Which app will you use to control your battery?</strong></p>
+      <div class="choices choices-stack" role="group" aria-label="Choose how to control your battery">
+        <button type="button" class="choice featured" data-app="yes" aria-pressed="false"><em class="rec">Most popular</em><b>Yes, use GloBird's app</b><span>Video help included. Most customers with a compatible battery pick this.</span></button>
+        <button type="button" class="choice" data-app="no" aria-pressed="false"><b>No, use my battery's own app</b><span>Guides for most brands. Your installer can also help.</span></button>
+        <button type="button" class="choice unsure" data-app="later" aria-pressed="false"><b>Not sure yet</b><span>Decide later. You can bind your battery any time.</span></button>
+      </div>
+      <details class="more">
+        <summary>Brands that can use our app</summary>
+        <div class="more-body">
+          <div class="brandlist"><span>AlphaESS</span><span>Anker</span><span>FoxESS</span><span>Neovolt</span><span>Redback</span><span>SAJ</span><span>Sigenergy</span><span>SolaX</span><span>Solis + Dyness</span><span>Sungrow</span><span>WHES (eCactus)</span></div>
+          <p>Brand not on the list? Pick <strong>No</strong>. You still get the main ZeroHero savings, and if your brand can connect in the future, we will let you know.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- A2 Battery timer -->
+    <section class="slide" data-tab="after" data-id="a2" hidden>
+      <span class="eyebrow">Battery setup</span>
+      <h2>Set up your <span class="hl">battery timer</span></h2>
+      <span class="yourchoice" hidden></span>
+      <p class="lead">Your battery will <strong>not</strong> charge from the grid by itself. To get <strong>free charging</strong> and to <strong>sell your excess power</strong>, it needs to be <strong>programmed</strong> (scheduled).</p>
+      <p class="note">The <strong>$1 a day is automatic.</strong> There is nothing to set up for it.</p>
+      <div class="set">
+        <h3>What to set</h3>
+        <div class="row2"><span class="tm">12pm – 3pm</span><span>Charge from the grid, up to 100%</span></div>
+        <div class="row2"><span class="tm opt">6pm – 9pm</span><span>Optional: sell your excess power</span></div>
+      </div>
+      <div class="blk" data-for="yes">
+        <h3>Using our app</h3>
+        <ul class="points">
+          <li><span class="tick"></span><p>Our app <strong>takes over scheduling</strong> from your battery's own app.</p></li>
+          <li><span class="tick"></span><p><strong>3 modes:</strong> Self-consumption (default), Schedule (you set the times), or Auto (we charge it for you, and can also sell within limits you set).</p></li>
+        </ul>
+        <a class="linkbtn" href="https://www.globirdenergy.com.au/join-vpp/" target="_blank" rel="noopener"><b>Step 1</b>Join the VPP (bind your battery)<small>If you did not do it during sign-up, do it in our app</small></a>
+        <a class="linkbtn" href="https://www.globirdenergy.com.au/energy-saver/zerohero-app/" target="_blank" rel="noopener"><b>Step 2</b>Watch the setup video<small>Shows the 3 modes and how to set your times</small></a>
+      </div>
+      <div class="blk" data-for="no">
+        <h3>Using your battery's own app</h3>
+        <a class="linkbtn" href="https://www.globirdenergy.com.au/battery-scheduling/" target="_blank" rel="noopener"><b>Our step-by-step guides</b>Set up scheduling in your battery's own app<small>Covers most brands</small></a>
+        <p class="small">Brand not covered? Your <strong>installer</strong> or <strong>battery manufacturer</strong> can help, or search online for your model.</p>
+      </div>
+      <button type="button" class="change" data-change>Change my app choice</button>
+    </section>
+
+    <!-- A3 Daily tips + help -->
+    <section class="slide fin" data-tab="after" data-id="a3" hidden>
+      <span class="eyebrow">Getting the most from it</span>
+      <h2>Tips and <span class="hl">help</span></h2>
+      <div class="set">
+        <h3>Your day at a glance</h3>
+        <div class="row2"><span class="tm">12pm – 3pm</span><span>Free power: charge the battery, run big appliances</span></div>
+        <div class="row2"><span class="tm opt">6pm – 9pm</span><span>Stay on battery for $1 a day. Optional: sell for 10c</span></div>
+      </div>
+      <h3 class="ns-h" style="font-size:19px">Tips to avoid buying grid power</h3>
+      <ul class="points">
+        <li><span class="tick"></span><p><strong>Stay under your battery's limit.</strong> If the oven, kettle, heater and air con run together, the extra may come from the grid. Spread big jobs out.</p></li>
+        <li><span class="tick"></span><p><strong>Do not run your battery flat.</strong> Run the washing machine, dryer and dishwasher in the free 12pm to 3pm window instead of the evening.</p></li>
+      </ul>
+      <p class="note pink" data-for="yes"><strong>Watch for Critical Events.</strong> On rare days when prices spike, our app may ask you to sell or charge for about 5 minutes. Do it and get rewarded ($1 per kWh to sell, 5c per kWh to charge). It is optional.</p>
+      <div class="contact">
+        <div class="box"><span class="who">Your agent</span><span class="nm">Rhys</span><a href="mailto:rhys.gerring@globirdenergy.com.au">rhys.gerring@globirdenergy.com.au</a><span class="small">Just reply to my email with your question and your phone number, and I will call you back.</span></div>
+        <div class="box"><span class="who">Customer service</span><a class="ph" href="tel:133456">133 456</a><a href="mailto:cs@globirdenergy.com.au">cs@globirdenergy.com.au</a></div>
+      </div>
+      <details class="more">
+        <summary>Refer friends and family: get $50</summary>
+        <div class="more-body">
+          <p class="big2">You get $50. They get $50.</p>
+          <p>For <strong>every friend or family member</strong> who joins us after you, <strong>you get $50 off your bill</strong> and <strong>they get $50 off theirs</strong>.</p>
+          <ol>
+            <li>Send them a link to join through <strong>your app</strong>.</li>
+            <li>Or put them in touch with me: <a href="mailto:rhys.gerring@globirdenergy.com.au">rhys.gerring@globirdenergy.com.au</a></li>
+            <li>Or they can call <strong>133 456</strong>. Any agent can sign them up. They just need to <strong>tell us you referred them</strong>.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+  </div>
+
+  <div class="dots" id="dots" role="tablist" aria-label="Choose slide"></div>
+  <div class="nav">
+    <button class="btn btn-ghost" id="prev" type="button">← Back</button>
+    <button class="btn btn-primary" id="next" type="button">Show me how</button>
+  </div>
+</main>
+</div>
+
+<script>
+(function(){
+  var TICK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="#ec008c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.querySelectorAll('.tick').forEach(function(t){t.innerHTML=TICK;});
+
+  function pt(h,r){var a=(h%12)/12*2*Math.PI-Math.PI/2;return[100+r*Math.cos(a),100+r*Math.sin(a)];}
+  document.querySelectorAll('svg.clock').forEach(function(svg){
+    var from=+svg.dataset.from,to=+svg.dataset.to;
+    var s='<circle cx="100" cy="100" r="94" fill="#ffffff" stroke="#2a1622" stroke-width="6"/>';
+    var p1=pt(from,84),p2=pt(to,84);
+    s+='<path d="M100 100 L'+p1[0]+' '+p1[1]+' A84 84 0 0 1 '+p2[0]+' '+p2[1]+' Z" fill="#fde3f2"/>';
+    s+='<path d="M'+p1.join(' ')+' A84 84 0 0 1 '+p2.join(' ')+'" fill="none" stroke="#ec008c" stroke-width="10" stroke-linecap="round"/>';
+    for(var h=0;h<12;h++){var a=pt(h,76),c=pt(h,h%3===0?64:70);s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+c[0]+'" y2="'+c[1]+'" stroke="#2a1622" stroke-width="'+(h%3===0?4:2)+'" stroke-linecap="round"/>';}
+    [[12,'12'],[3,'3'],[6,'6'],[9,'9']].forEach(function(q){var p=pt(q[0],50);s+='<text x="'+p[0]+'" y="'+(p[1]+6)+'" text-anchor="middle" font-family="Rubik,sans-serif" font-weight="800" font-size="17" fill="'+((q[0]===from||q[0]===to)?'#ec008c':'#2a1622')+'">'+q[1]+'</text>';});
+    var hh=pt(to,40),mm=pt(from,60);
+    s+='<line x1="100" y1="100" x2="'+mm[0]+'" y2="'+mm[1]+'" stroke="#2a1622" stroke-width="5" stroke-linecap="round"/>';
+    s+='<line x1="100" y1="100" x2="'+hh[0]+'" y2="'+hh[1]+'" stroke="#2a1622" stroke-width="7" stroke-linecap="round"/>';
+    s+='<circle cx="100" cy="100" r="7" fill="#fbae47" stroke="#2a1622" stroke-width="2.5"/>';
+    svg.innerHTML=s;
+  });
+
+  // ---- Battery brands: what to find and where (from globirdenergy.com.au/join-vpp) ----
+  const LINK='https://www.globirdenergy.com.au/join-vpp/';
+  const BRANDS=[
+    {id:'alphaess',name:'AlphaESS',need:['Inverter serial number','Check code'],app:'AlphaESS',
+      appSteps:['Open the AlphaESS app.','Your serial number is on the Home screen or under Settings, depending on your app version.'],
+      inverter:'Check the nameplate on the right-hand side of the inverter. The serial number starts with "AL" and the check code is printed just below it.',
+      fmt:'Serial number starts with "AL"',warn:'The check code is only on the inverter nameplate, not in the app.'},
+    {id:'anker',name:'Anker',need:['System ID','Verification code'],app:'Anker',
+      appSteps:['Open the Anker app and go to Settings.','Tap Virtual Power Plant.','Find your System ID.','Tap to generate a Verification Code, agree and continue.','Copy both the System ID and Verification Code.']},
+    {id:'foxess',anchor:'',name:'FoxESS',need:['Inverter serial number'],app:'FoxESS',
+      appSteps:['Open the FoxESS app and tap Device in the bottom menu.','Select your inverter.','Tap the serial number under the inverter image.','On the About Device page, the value labelled "SN" is your serial number.']},
+    {id:'neovolt',name:'Neovolt',need:['Inverter serial number','Check code'],app:'Neovolt',
+      appSteps:['Open the Neovolt app.','Your serial number (SN) is at the top of the Home page.'],
+      inverter:'Check the nameplate on the side of the inverter for the serial number and check code.',
+      warn:'The check code is only on the inverter nameplate, not in the app.'},
+    {id:'redback',name:'Redback',need:['Inverter serial number'],app:'Redback',
+      appSteps:['Open the Redback app and tap System.','Find the Serial Number.','Using the Redback portal instead? Click Details on the Home page to see the Inverter Number.'],
+      inverter:'Check the nameplate on the left-hand side of the inverter for the S/N.',
+      fmt:'Serial number starts with "RB"'},
+    {id:'saj',name:'SAJ',need:['Inverter serial number'],app:'Elekeeper (SAJ)',
+      appSteps:['Open the Elekeeper app and tap Device in the bottom menu.','Your SN is shown at the top.'],
+      inverter:'Check the nameplate on the side of the inverter for the Serial Number (S/N).',
+      fmt:'18 characters, starts with "H"'},
+    {id:'sigenergy',name:'Sigenergy',need:['System ID'],app:'MySigen',
+      appSteps:['Open the MySigen app.','Under My Home, tap System Settings.','Under General, tap About.','Your System ID is under Basic Info.'],
+      warn:'You need the System ID, not the serial number.'},
+    {id:'solax',name:'SolaX',need:['Inverter serial number'],app:'SolaXCloud',
+      appSteps:['Open the SolaXCloud app and go to the Device page.','Tap your device. The Inverter Serial Number is shown on the right.'],
+      inverter:'Check the label on the side of the inverter for the Serial Number.'},
+    {id:'solis',anchor:'solis-dyness',name:'Solis + Dyness',need:['Inverter serial number'],app:'SolisCloud',
+      appSteps:['Open the SolisCloud app and select your Plant on the Home screen.','Tap Device in the top banner.','Your Inverter Serial Number is shown.'],
+      inverter:'Check the nameplate on the side of the inverter.',
+      fmt:'14 characters: "H" + 13 digits, or "10M0A" + 9 characters'},
+    {id:'sungrow',name:'Sungrow',need:['Inverter serial number','NMI in iSolarCloud'],app:'iSolarCloud',
+      appSteps:['Open the iSolarCloud app and tap the Device icon on the Home page.','Select your inverter. The S/N is your serial number.','Then tap Settings → General Information.','Tap the Edit icon and enter your NMI (first 10 digits only).'],
+      fmt:'Serial number: 11 characters, starts with "A"',warn:'Your NMI must be entered in the iSolarCloud app to connect.'},
+    {id:'whes',name:'WHES (eCactus)',need:['Inverter serial number'],app:'ECOS',
+      appSteps:['Open the ECOS app.','Your serial number is in the top-left corner of the Home page.'],
+      inverter:'Check the nameplate on the front of the device.',
+      fmt:'Serial number starts with "SHA"'},
+    {id:'other',name:'Other',other:true}
+  ];
+
+  var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  var brand=null,app=null;
+
+  function findHtml(b){
+    if(!b)return '<p>Choose your battery brand above to see where to find your details.</p>';
+    if(b.other)return '<p>Your brand isn’t on our list yet, so it can’t connect to our app for now. Choose <strong>“No, use my battery’s own app”</strong> instead. You still get the main ZeroHero savings.</p>';
+    var h='<h3>You’ll need</h3><div class="sn-need">'+b.need.map(function(n){return '<span>'+esc(n)+'</span>';}).join('')+'</div>';
+    h+='<h3>In the '+esc(b.app)+' app</h3><ol>'+b.appSteps.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ol>';
+    if(b.inverter)h+='<h3>Or on the inverter</h3><p>'+esc(b.inverter)+'</p>';
+    if(b.fmt)h+='<span class="fmt">'+esc(b.fmt)+'</span>';
+    if(b.warn)h+='<p class="warn">'+esc(b.warn)+'</p>';
+    h+='<p class="small">Need pictures? <a href="'+LINK+(b.anchor===undefined?'#'+b.id:(b.anchor?'#'+b.anchor:''))+'" target="_blank" rel="noopener">See screenshots for '+esc(b.name)+' on our website</a></p>';
+    return h;
+  }
+  var snCard=document.getElementById('snCard'),snLead=document.getElementById('snLead');
+  function renderSN(){
+    var own=app!=='yes';
+    var b=BRANDS.find(function(x){return x.id===brand;});
+    var bn=b&&!b.other?esc(b.name):'Your battery brand';
+    var wasOpen=!!snCard.querySelector('details[open]');
+    snLead.innerHTML=own
+      ?'<ul class="ns-list"><li>Select your <strong>battery brand</strong>.</li><li>Leave your <strong>inverter serial number</strong> blank.</li><li>Tick the <strong>VPP terms and conditions</strong> box.</li></ul>'+
+       '<p class="ns-note"><strong>Important:</strong> You must tick the VPP box to continue, but we won’t connect you to our VPP unless you give your inverter serial number. So it is fine to leave the serial number blank.'+(app==='later'?' If you decide to use our app later, you can bind your battery in our app.':'')+'</p>'
+      :'<ul class="ns-list"><li>Select your <strong>battery brand</strong>.</li><li>Enter your <strong>inverter serial number</strong>. See below for where to find it.</li><li>Tick the <strong>VPP terms and conditions</strong> box.</li></ul>';
+    var opts='<option value="">Choose your brand</option>'+BRANDS.map(function(x){return '<option value="'+x.id+'"'+(x.id===brand?' selected':'')+'>'+esc(x.name)+'</option>';}).join('');
+    snCard.innerHTML=
+      '<div class="fm" aria-label="Example of the battery details page">'+
+        '<div class="fm-title">Battery details</div>'+
+        '<div class="fm-row"><div class="fm-head"><span class="fm-lbl">Battery Inverter Brand</span><span class="fm-tag t1">1 · Select brand</span></div><div class="fm-field f1"><span class="fm-val">'+bn+'</span><i>▾</i></div></div>'+
+        '<div class="fm-row"><div class="fm-head"><span class="fm-lbl">Inverter serial number</span>'+(own?'<span class="fm-tag soft t2">2 · Leave blank</span>':'<span class="fm-tag t2">2 · Enter serial</span>')+'</div><div class="fm-field f2">'+(own?'':'<span class="fm-val2">Your serial number</span>')+'</div></div>'+
+        '<div class="fm-row"><div class="fm-head"><span class="fm-lbl">Terms and Conditions</span><span class="fm-tag t3">3 · Tick the box</span></div><div class="fm-check"><span class="fm-box">✓</span><span>I agree to GloBird’s Virtual Power Plant (VPP) Terms and Conditions…</span></div></div>'+
+        '<span class="fm-ripple"></span>'+
+        '<div class="fm-cursor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L7.5 14.8 L10.6 21.6 L13.6 20.3 L10.6 13.6 L17 13.6 Z" fill="#2a1622" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>'+
+      '</div>'+
+      (own?'':'<label class="brandpick">Your battery brand<select id="brandSelect">'+opts+'</select></label>'+
+        '<details class="sn-more"'+(wasOpen||brand?' open':'')+'><summary>Where to find your '+(b&&!b.other?esc(b.name)+' ':'')+'inverter serial number</summary><div class="sn-body">'+findHtml(b)+'</div></details>');
+    var sel=document.getElementById('brandSelect');
+    if(sel)sel.addEventListener('change',function(){brand=sel.value||null;renderSN();});
+  }
+
+  var NAMES={yes:'Your choice: our app',no:"Your choice: your battery's own app",later:'Your choice: not sure yet'};
+  var choiceBtns=[].slice.call(document.querySelectorAll('.choice[data-app]'));
+  function setApp(v){
+    app=v||null;
+    choiceBtns.forEach(function(c){c.setAttribute('aria-pressed',c.dataset.app===v?'true':'false');});
+    document.querySelectorAll('[data-for="yes"]').forEach(function(el){el.hidden=app==='no';});
+    document.querySelectorAll('[data-for="no"]').forEach(function(el){el.hidden=app==='yes';});
+    document.querySelectorAll('.yourchoice').forEach(function(el){el.hidden=!app;el.textContent=app?NAMES[app]:'';});
+    renderSN();updateNext();
+  }
+
+  // ---- Deck with two tabs ----
+  var all=[].slice.call(document.querySelectorAll('.slide'));
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var dots=document.getElementById('dots'),prev=document.getElementById('prev'),next=document.getElementById('next');
+  var count=document.getElementById('count'),bar=document.getElementById('bar');
+  var tab='before',list=[],i=0,CH=-1;
+
+  function label(){
+    if(tab==='before'&&i===0)return 'Show me how';
+    if(i===list.length-1)return 'Start again';
+    return 'Next';
+  }
+  function updateNext(){next.hidden=(i===CH&&!app);next.textContent=label();}
+
+  function setTab(t,start){
+    tab=t;
+    tabs.forEach(function(b){b.setAttribute('aria-selected',b.dataset.tab===t?'true':'false');});
+    list=all.filter(function(s){return s.dataset.tab===t;});
+    CH=list.findIndex(function(s){return s.hasAttribute('data-choice');});
+    dots.innerHTML='';
+    list.forEach(function(_,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to slide '+(k+1));b.addEventListener('click',function(){go(k);});dots.appendChild(b);});
+    i=-1;go(start||0,true);
+  }
+  function go(n,init){
+    n=Math.max(0,Math.min(list.length-1,n));
+    // They must pick an app before the steps that depend on it.
+    if(n>CH&&!app)n=CH;
+    var dir=n>=i?'24px':'-24px';
+    all.forEach(function(s){s.hidden=true;s.classList.remove('enter');});
+    var s=list[n];s.hidden=false;
+    if(!init){s.style.setProperty('--dir',dir);void s.offsetWidth;s.classList.add('enter');}
+    i=n;
+    [].forEach.call(dots.children,function(d,k){d.setAttribute('aria-current',k===n?'true':'false');});
+    count.textContent=(n+1)+' / '+list.length;bar.style.width=((n+1)/list.length*100)+'%';
+    prev.disabled=n===0;
+    updateNext();
+    try{history.replaceState(null,'','#'+s.dataset.id);}catch(e){}
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.tab!==tab)setTab(b.dataset.tab);});});
+  document.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){setTab(b.dataset.goto);});});
+  document.querySelectorAll('[data-change]').forEach(function(b){b.addEventListener('click',function(){go(CH);});});
+  choiceBtns.forEach(function(c){c.addEventListener('click',function(){
+    setApp(c.dataset.app);c.classList.add('flash');
+    setTimeout(function(){c.classList.remove('flash');if(i===CH)go(CH+1);},700);
+  });});
+  next.addEventListener('click',function(){go(i===list.length-1?0:i+1);});
+  prev.addEventListener('click',function(){go(i-1);});
+  document.addEventListener('keydown',function(e){
+    if(e.target.closest&&e.target.closest('summary,a,input,select,textarea'))return;
+    if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1);
+  });
+  var sx=null,sy=null,stage=document.getElementById('stage');
+  stage.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  stage.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(i+(dx<0?1:-1));sx=null;},{passive:true});
+
+  setApp(null);
+  // Links: add #after to open the After sign up tab (or #a1–#a3, #b1–#b8 for a slide).
+  var h=(location.hash||'').slice(1);
+  if(h==='after')setTab('after');
+  else{var m=/^([ab])([1-8])$/.exec(h);if(m)setTab(m[1]==='a'?'after':'before',+m[2]-1);else setTab('before');}
+})();
+</script>
+</body>
+</html>
